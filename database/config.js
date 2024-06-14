@@ -1,14 +1,14 @@
 const mongoose= require("mongoose");
-
+require("colors")
 
 
 const dbConnection= async()=> {
     try {
-        await mongoose.connect("mongodb+srv://user_node_cafe:0TORsEkmpj1QX1Qb@miclustercafe.jyfrhki.mongodb.net/cafeDB");
-            console.log("Base de datos", "--online--")
+        await mongoose.connect(process.env.MONGODB_CNN);
+            console.log("Base de datos".yellow, "--online--".green)
     } catch (error) {
         console.log(error);
-        throw new Error("Error a la hora de iniciar la base de datos");
+        throw new Error("Error a la hora de iniciar la base de datos".red);
     }
 }
 
