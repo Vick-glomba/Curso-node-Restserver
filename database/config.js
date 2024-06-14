@@ -4,7 +4,7 @@ const mongoose= require("mongoose");
 
 const dbConnection= async()=> {
     try {
-        await mongoose.connect( process.env.MONGODB_CNN);
+        await mongoose.connect("mongodb+srv://user_node_cafe:0TORsEkmpj1QX1Qb@miclustercafe.jyfrhki.mongodb.net/cafeDB");
             console.log("Base de datos", "--online--")
     } catch (error) {
         console.log(error);
