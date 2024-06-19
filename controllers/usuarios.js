@@ -69,15 +69,13 @@ const usuariosPatch=(req = request, res = response)=>{
 const usuariosDelete= async(req = request, res = response)=>{
     //extraigo el id enviado despues del /  PARAMETRO
     const {id} = req.params;
-
-    // const usuario= await Usuario.findByIdAndDelete(id)
-    const {estado} = await Usuario.findById(id);
     
-    if (!estado){
-        return res.json({msg: "Usuario ya se encontraba borrado en DB"})
-    }
     const usuario= await Usuario.findByIdAndUpdate(id, {estado: false})
-    res.json(usuario)
+     
+    res.json({
+        usuario,
+        msg:"El usuario fue borrado correctamente"
+    })
 }
 
 

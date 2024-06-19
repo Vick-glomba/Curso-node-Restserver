@@ -5,9 +5,12 @@ const { dbConnection } = require("../database/config");
 
 class Server {
     constructor() {
-        this.app = express()
-        this.port = process.env.PORT
+        this.app = express();
+        this.port = process.env.PORT;
+        this.authPath= "/api/auth";
         this.usuariosPath= "/api/usuarios";
+
+
         //Conectar a base de datos
         this.conectarDB();
         //Middlewares
@@ -31,7 +34,8 @@ class Server {
     }
 
     routes(){
-        this.app.use(this.usuariosPath, require("../routes/usuarios") )
+        this.app.use(this.authPath, require("../routes/auth") );
+        this.app.use(this.usuariosPath, require("../routes/usuarios") );
     }
 
     listen(){
