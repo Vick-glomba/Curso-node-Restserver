@@ -29,7 +29,7 @@
     <script>
         function handleCredentialResponse(response) {
            //google Token: ID_TOKEN
-           //console.log("id_token: ",response.credential);
+          
            const url = `${window.location.origin}/api/auth/google`;
             const body = {id_token: response.credential}
 
@@ -50,12 +50,17 @@
 
         const button = document.getElementById("google_signout")
         button.onclick= ()=>{
-            console.log(google.accounts.id)
-            google.accounts.id.disableAutoSelect()
-            google.accounts.id.revoke(localStorage.getItem("email"), done=> {
-                localStorage.clear();
-                location.reload();
-            })
+            
+            google.accounts.id.disableAutoSelect();
+            const log = localStorage.getItem("email");
+            if (log){
+                    google.accounts.id.revoke(localStorage.getItem("email"), done=> {
+                    localStorage.clear();
+                    location.reload();
+                })
+            } else{
+                console.log("no estas logeado")
+            }
         }
       </script>
 
