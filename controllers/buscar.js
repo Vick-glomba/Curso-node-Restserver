@@ -81,8 +81,10 @@ const buscarProductosPorCategoria= async(termino= "", res = response) => {
     const esMongoId= ObjectId.isValid(termino);
     if (esMongoId){
         const producto = await Producto.find({categoria: termino, estado: true})
+        .populate("nombre")
         .populate("categoria", "nombre")
         .populate("usuario", "nombre")
+        
         return res.json({
             results: (producto) ? [producto] : []
         })
@@ -93,11 +95,13 @@ const buscarProductosPorCategoria= async(termino= "", res = response) => {
     const categoria= await Categoria.findOne({nombre: regex}, {estado:true})
     if (categoria){
         
-        const producto = await Producto.find({categoria},{estado: true})
+        const productos = await Producto.find({categoria},{estado: true})
+            .populate("nombre")
             .populate("categoria", "nombre")
             .populate("usuario", "nombre")
+            
           return  res.json({
-                results: producto
+                results: productos
             })
     }
     res.json({
