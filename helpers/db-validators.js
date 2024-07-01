@@ -39,13 +39,25 @@ const esRoleValido= async(rol= "") => {
     }
  }
 
- 
+ const coleccionesPermitidas= (coleccion, coleccionesArray= []) =>{
+    
+    const incluida= coleccionesArray.includes(coleccion)
+    
+    if(!incluida){
+        throw new Error(`${coleccion} no es una coleccion permitida`);
+    }
+    return true
+ }
+
+
+
 module.exports= {
     esRoleValido,
     emailExiste,
     existeUsuarioPorId,
     existeCategoriaPorId,
-    existeProductoPorId
+    existeProductoPorId,
+    coleccionesPermitidas
     
 }
 
